@@ -1,0 +1,51 @@
+% (This file is included by thesis.tex; you do not latex it by itself.)
+
+\begin{introduction}
+
+% If you need to use a \section
+% command you will need to use \section*, \subsection*, etc. so that
+% you don't get any numbering.  You probably won't be using any of
+% these commands in the abstract anyway.
+
+Ferdinand Georg Frobenius was a German mathematician born February 14, 1877 in a suburb of Berlin. He worked on diverse fields such as elliptic functions, differential equations, number theory, and group theory. He has numerous mathematical ideas named after him but one in particular will be the focus of this paper. 
+
+In the early part of the 20th century, Frobenius proposed the \emph{Diophantine Frobenius Problem} which would motivate the study of numerical monoids. The problem asks what is the largest positive integer (called the \emph{Frobenius number}) that is \emph{not} representable as a nonnegative integer linear combination of relatively prime positive integers? For example, if we take the subset of the natural numbers $\{5, 7, 9\}$ and consider all possible combinations of these numbers if we can only add them (including repetitions), then we get the following set
+\[
+	\{5, 7, 9, 10, 12, 14, \rightarrow \}
+\]
+where the symbol $\rightarrow$ means that every integer greater than 14 is in this set. We can see the largest natural number not in this set is 13.
+
+What Frobenius ended up doing by proposing this question was to motivate the study of the gaps in the natural numbers. This study is a fascinating tour de force of linear algebra, number theory, and abstract algebra; see \cite{Numerical_book,Frobenius_book,factorizations1,Numerical_book2}. The Frobenius number problem has a ring theoretical interpretation which we will explain after introducing several algebraic concepts.
+
+In this paper we denote the nonnegative integers by $\Z_+$ and $\N$ to denote the natural numbers $\{1, 2, 3, \ldots\}$.
+
+A \emph{numerical monoid} $M$ is a subset of the nonnegative integers that contains the additive identity $0$, is closed under addition and has a finite complement (possibly empty) in the nonnegative integers. Every numerical monoid $M$ can be written (non uniquely in general) as
+\[
+	\Z_+ m_1 + \cdots + \Z_+ m_e := \{a_1m_1 + \cdots + a_em_e \mid a_1, \ldots ,a_e \in \Z_+\}
+\]
+for some relatively prime natural numbers $m_1,\ldots,m_e$, called \emph{generators} of $M$.
+
+For a field $\kk$ and a numerical monoid $M$, the \emph{monoid algebra} $\kk[M]$ can be thought of as the $\kk$-subalgebra of the univariate polynomial ring $\kk[X]$, consisting of the polynomials whose support monomials are of the form $\lambda X^m$, where $\lambda\in\kk$ and $m\in M$. In other words, $\kk[M]$ is the $\kk$-linear span of the monomials $X^m$, $m\in M$: this $\kk$-vector space contains $\kk$ and is closed under the usual polynomial multiplication. There is also a surjective $\kk$-algebra homomorphism from the multivariate polynomial ring $\kk[X_1,\ldots,X_e]$ to $\kk[M]$, namely
+\begin{align*}
+\kk[X_1,\ldots,X_e]&\to\kk[M],\\
+X_i&\mapsto X^{m_i},\\
+&\qquad\quad i=1,\ldots,e.
+\end{align*}
+In the case $\kk$ is algebraically closed, this surjection via the \emph{Hilbert Nullstellensatz} induces an embedding of the \emph{monomial variety}, corresponding to $\kk[M]$, in the \emph{affine space} of dimension $e$. Correspondingly, $e$ is called the \emph{embedding dimension}, which also explains our notation.
+
+The algebra $\kk[M]$ is graded with respect to the degrees in $X$:
+$$
+\kk[M]=\kk \oplus A_1\oplus A_2\oplus\cdots
+$$
+and we have the resulting Hilbert function $H_{\kk[M]}(i)=\dim_\kk A_i$. For every $i$, we have $H_{\kk[M]}(i)=0$ or $1$ and, since $\ZZ_+\setminus M$ is finite, the function $H_{\kk[M]}(-)$ eventually becomes constant with value $1$. The Frobenius number of $m_1,\ldots,m_e$ is then the largest value of $i$, for which $H_{\kk[M]}(i)=0$. In other words, the Frobenius number problem asks to determine when the mentioned Hilbert function stabilizes.
+
+Our work is about the stabilization of the Hilbert function of another graded algebra, also naturally associated to $M$ -- the \emph{associated graded algebra} $\gr(\kk[M])$ of $\kk[M]$ with respect to the maximal monomial ideal in $\kk[M]$. It determines a \emph{flat deformation} of $\kk[M]$ and the Hilbert function of $\gr(\kk[M])$ carries vital information on the additive structure of $M$. In plain monoid terms, $H_{\gr(\kk[M])}(i)$ is the number of elements of $M$ that can be written as sums of $i$ generators and can't be written as sums of more than $i$ generators. 
+
+It follows from dimension theory in commutative algebra that $H_{\gr(\kk[M])}(-)$ eventually stabilizes, just like $H_{\kk[M]}(-)$, and the determination where this happens is a nontrivial challenge. We call the stabilization index in this Hilbert function the \emph{second Frobenius number} of $M$, denoted by $\F'(M)$. To the best of our knowledge, these numbers have not been studied, although the asymptotic behavior of $H_{\gr(\kk[M])}$ is known \cite{maximal_length}. The commutative algebra approach only implies the existence of $\F'(M)$, but does not offer an upper bound. 
+
+Our main theoretical result is an explicit upper bound of the second Frobenius number in terms of the generators of $M$ (Theorem \ref{stabilization}). In the second part of the work we implement several algorithms for computing $\F'(M)$ and use it to develop computational data on many examples of numerical monoids. These computations provide strong evidence that $\F'(M)$ is considerably smaller than the theoretical upper bound in Theorem \ref{stabilization}.
+
+We expect that the second Frobenius number is at least as interesting as the original Frobenius number and it provides a fertile ground for exploration of numerical monoids from this novel perspective.
+
+
+\end{introduction}

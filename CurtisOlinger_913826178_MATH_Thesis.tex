@@ -1,0 +1,165 @@
+\documentclass{sfsuthesis}
+\usepackage[
+backend=biber,
+style=alphabetic,
+sorting=ynt
+]{biblatex}
+
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{rotating} % provides sidewaystable and sidewaysfigure
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usepackage{booktabs}
+\usepackage{array}
+% comment out the following line to control indentation of the first paragraph of a section
+\usepackage{indentfirst}
+\usepackage{setspace}
+\usepackage{hyperref}
+\hypersetup{
+    pdftitle={Associated Graded Rings for Numerical Monoid Rings},
+    pdfauthor={Curtis Marshall Olinger}
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% To compile this file from the command line, run "latex thesis", then "biber thesis"
+% (or "bibtex thesis", if the output from latex asks for that instead),
+% and then "latex thesis" (without the quotes in each case).
+%
+% Alternatively, use Overleaf, MacTeX, or MikTeX to compile to PDF.
+%
+% To compile this file to HTML from the command line, run 
+%  make4ht -f html5+mjcli thesis.tex "mathjax"
+% this step requires Nodes.js, MathJax, and mjcli.js to be installed and working on your machine
+
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\gr}{\text{gr}}
+\newcommand{\GL}{\textit{GL}}
+\newcommand{\Ap}{\text{Ap}}
+\newcommand{\F}{\mathsf{F}}
+\newcommand{\G}{\mathsf{G}}
+\newcommand{\la}{\lambda}
+
+\def\ZZ{\mathbb Z}
+\def\NN{\mathbb N}
+\def\FF{\mathbb F}
+\def\CC{\mathbb C}
+\def\RR{\mathbb R}
+\def\QQ{\mathbb Q}
+\def\Hilb{\operatorname{Hilb}}
+\def\e{\mathbf{e}}
+\def\kk{\mathbf{k}}
+\newcommand{\dec}{\textbf{dec}}
+\def\spec{\operatorname{Spec}}
+\def\gr{\operatorname{gr}}
+\def\H{\mathcal{H}}
+\def\conv{\operatorname{conv}}
+\def\F{\mathbf{F}}
+\def\spec{\operatorname{Spec}}
+
+% comment out the following two lines for single spacing
+\def\dsp{\def\baselinestretch{2.0}\large\normalsize}
+\dsp
+
+\addtolength{\abovecaptionskip}{\baselineskip}
+
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+
+\newtheorem*{remark}{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\bibliography{references}
+
+\hyphenation{mar-gin-al-ia}
+\hyphenation{bra-va-do}
+
+%path to the folder which contains figures
+\graphicspath{ {./figures/} }
+
+\begin{document}
+
+% Declarations for Front Matter
+
+\title{Associated Graded Rings for Numerical Monoid Rings}
+\author{Curtis Marshall Olinger}
+\degreesemester{May}
+% Select one of the semesters: December, May, or August.
+\degreeyear{2022}
+% Enter the year in which you are submitting your thesis.
+\degree{Masters of Arts}
+\field{Mathematics}
+
+\maketitle
+\copyrightpage
+
+\frontmatter
+\include{abstract}
+\include{acknowledgments}
+\tableofcontents
+\clearpage
+
+\mainmatter
+\include{introduction}
+
+\pagestyle{headings}
+
+\include{chap1}
+\include{chap2}
+\include{chap3}
+\include{chap4}
+\include{chap5}
+
+\renewcommand{\baselinestretch}{1.0}
+\selectfont
+
+\include{chap6}
+\include{chap7}
+
+\printbibliography
+
+\end{document}

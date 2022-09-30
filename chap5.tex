@@ -1,0 +1,81 @@
+\chapter{Generating the $d_k(M)$}
+
+We keep the notation, introduced in Section \ref{Decomposition_length}.
+
+Given a natural number $n$, in this section we describe an algorithm for computing the numbers $d_1(M),d_2(M),\ldots,d_n(M)$.
+
+\section{Algorithm 1.}\label{Algorithm 1}
+
+\medskip\noindent\emph{Step 1.} Declare a struct called node to encapsulate a monoid element's value and length, which is not necessarily its maximal decomposition length. This node will be used in a linked list which is generated in the next step. 
+
+\medskip\noindent\emph{Step 2.} To compute the monoid with generating set $\{m_1, \ldots, m_e\}$, create $e$ for-loops where each loop ranges from 0 to $\frac{nm_e}{m_1}$. The nested loops will create duplicate elements with different coefficients and, not necessarily, different lengths (an element can have more than one representation with the same length). 
+
+It is important to create enough copies of each element less than $nm_e - m_1$ so that element's maximum decomposition is found. An element less than $nm_e - m_1$ can be generated with coefficients whose sum is less than or equal to $n$, but its maximum decomposition is not found. 
+
+During the loop, check if the element is less than $nm_e - m_1$ before creating a node and inserting into the linked list. 
+
+\medskip\noindent\emph{Step 3.} Create an array of length $nm_e - m_1$. Hash the linked list into an array where each element of the array corresponds to an element in the linked list. Before inserting a node into the array, check if !NULL and if the new node has a length greater than the existing node. If NULL, insert regardless. Thus the elements of the array will either be NULL or contain a pointer to one node with the maximum decomposition length of that element. 
+
+\begin{verbatim}
+LET m = monoid element
+IF (m'th element of arr is NULL)
+    ASSIGN node to array
+    Set next to NULL
+ELSE IF (length of node > length of node in array m'th element)
+    FREE node in m'th position
+    ASSIGN node to array
+    Set next to NULL
+\end{verbatim}
+
+
+\medskip\noindent\emph{Step 4.} Create decomposition array of size $n$. Hash previous array into decomposition array by creating a linked list of nodes who all have a maximal decomposition length equal to the decomposition array's element position. 
+
+\begin{verbatim}
+IF (element array is not NULL and max decomp length is less than n)
+    ASSIGN node in decomposition array to new node next
+    ASSIGN new node to decomposition array in length position in array
+\end{verbatim}
+
+The number of nodes in the linked list in each position $k$ of the decomposition array will equal $d_k(M)$. Count and print those lists and you are done. 
+
+\section{Algorithm 2}\label{Algorithm 2}
+
+
+\medskip\noindent\emph{Step 1.} To reduce the computations, one can first extract $\Hilb(M)$ from the generating set $\{m_1,\ldots,m_e\}$. This can be done using \textsf{Normaliz}. The steps below are independent of this steps, though.
+
+\medskip\noindent\emph{Step 2.} Define $M_k=[1,k]\cap M$ and generate the ascending chain of sets
+\begin{align*}
+M_1\subset M_2\subset M_3\subset\ldots\subset M_{nm_e-m_1},
+\end{align*}
+inductively as follows. Without loss of generality we can assume $m_1>1$, for otherwise $M=\ZZ_+$ and everything trivializes. Put $M_1=\{0\}$ and, for $k>1$,
+\begin{align*}
+M_k=
+\begin{cases}
+M_{k-1},\ \ \text{if}\ \ \big(k-\Hilb(M)\big)\cap M_{k-1}=\emptyset,\\
+M_{k-1}\cup\{k\},\ \ \text{if}\ \ \big(k-\Hilb(M)\big)\cap M_{k-1}\not=\emptyset.
+\end{cases}
+\end{align*}
+
+\medskip\noindent\emph{Step 3.} We construct the subsets $\dec_k(M)\subset\ZZ^e_+$ inductively. Put
+\begin{align*}
+\dec_1(M)=\{\e_1,\ldots,\e_e)\ \text{and}\ d_1=e.
+\end{align*}
+
+Assume we have generated $\dec_k(M)$ for some $k\ge1$. Then one generates $\dec_{k+1}(M)$ as follows.
+
+By Lemma \ref{subsum}, we have the inclusion
+\begin{align*}
+\dec_{k+1}(M)\subset\bigcup_{i=1}^e\big(\e_i+\dec_k(M)\big)
+\end{align*}
+For every element $x\in\bigcup_{i=1}^e\big(\e_i+\dec_k(M)\big)$,
+one verifies the inclusion $x\in\dec_{k+1}(M)$ by checking the following condition:
+\begin{align*}
+\big\{\Gamma(x)-\Gamma(y)\ |\ y\in\dec_k(M)\big\}\cap\big(M_{(k+1)m_e-km_1}\setminus\Hilb(M)\big)=\emptyset,
+\end{align*} 
+the map $\Gamma:\ZZ_+^e\to\ZZ_+$ as in Section \ref{Stabilization}.
+
+\medskip\noindent\emph{Step 4.} After generating the sets $\dec_1(M),\ldots,\dec_n(M)$, the numbers $d_k(M)$ are determined by
+\begin{align*}
+d_k(M)=\#\left\{\Gamma(x)\ |\ x\in\dec_k(M)\right\}.
+\end{align*}
+
